@@ -1,5 +1,8 @@
+# Fichier docker-compose.yml
+
 services:
-  frontend:
+  # Nom du projet suivi de l’élément concerné pour une meilleure organisation
+  reactfront:
     build:
       context: ./Front
       dockerfile: Dockerfile
@@ -11,9 +14,12 @@ services:
     environment:
       - VITE_API_URL=${VITE_API_URL}
     depends_on:
-      - db 
+      - reactdb 
+    networks:
+      - reactboilerplate
 
-  backend:
+  # Nom du projet suivi de l’élément concerné pour une meilleure organisation
+  reactback:
     build:
       context: ./Back
       dockerfile: Dockerfile
@@ -24,19 +30,21 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=${NODE_ENV}
-      - DB_HOST=${DB_HOST}
+      - DB_HOST=reactdb  # Utilisation du nom du container pour DB_HOST
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
     depends_on:
-      db:
+      reactdb:
         condition: service_healthy 
+    networks:
+      - reactboilerplate
 
-  db:
-    build:
-      context: ./bd
-      dockerfile: Dockerfile
+  # Nom du projet suivi de l’élément concerné pour une meilleure organisation
+  reactdb:
+    image: mysql:8  # Utilisation de l'image officielle MySQL
     ports:
+      # Exposez ce port uniquement si nécessaire
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
@@ -50,6 +58,13 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    networks:
+      - reactboilerplate
 
 volumes:
   db_data:
+
+# Réseau dédié pour isoler les services du projet
+networks:
+  reactboilerplate:
+    driver: bridge

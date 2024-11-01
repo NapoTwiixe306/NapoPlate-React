@@ -25,10 +25,25 @@ export default function Navbar() {
     };
 
     return (
-        <header className="relative flex justify-between items-center p-4 text-black dark:text-white bg-gray-100 dark:bg-gray-900 border-b border-gray-300 dark:border-gray-700">
-            <h1 className="text-xl font-bold">
-                <Link to="/">ReactBoilerplate</Link>
-            </h1>
+        <header className="fixed top-0 left-0 w-full z-50 flex justify-between items-center p-4 text-black dark:text-white bg-transparent backdrop-blur-md border-b border-transparent dark:border-transparent">
+            <div className='flex gap-2'>
+                <svg
+                className="w-8 h-8 text-indigo-600"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                >
+                <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                <polyline points="2 17 12 22 22 17" />
+                <polyline points="2 12 12 17 22 12" />
+                </svg>
+                <h1 className="text-xl font-bold">
+                    <Link to="/">ReactBoilerplate</Link>
+                </h1>
+            </div>
 
             <button 
                 className="md:hidden p-2 rounded-md focus:outline-none bg-gray-700 text-white dark:bg-white dark:text-black" 
@@ -41,7 +56,6 @@ export default function Navbar() {
                 <Link to="/" className="hover:text-gray-700 dark:hover:text-gray-300">Home</Link>
                 <Link to="/" className="hover:text-gray-700 dark:hover:text-gray-300">About</Link>
                 <Link to="/" className="hover:text-gray-700 dark:hover:text-gray-300">Contact</Link>
-
             </nav>
 
             <div className="hidden md:flex items-center space-x-4">
