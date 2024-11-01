@@ -5,8 +5,8 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+  	extend: {}
   },
-  darkMode: "class",
-  plugins: [],
+  darkMode: ["class"],
+  plugins: [require("tailwindcss-animate")],
 }
