@@ -1,11 +1,11 @@
-// db.js
+require('dotenv').config(); 
 const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
-    host: 'db', // ou l'adresse de ton conteneur MySQL
-    user: 'julien', // ton nom d'utilisateur
-    password: 'Jean-Michelle7845', // ton mot de passe
-    database: 'ReactBoilerplate' // nom de ta base de données
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER, 
+    password: process.env.DB_PASSWORD, 
+    database: process.env.DB_NAME 
 });
 
 connection.connect((err) => {
