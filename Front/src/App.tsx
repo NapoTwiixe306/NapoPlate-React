@@ -4,9 +4,11 @@ import ConnectWithWallet from './Views/Auth/connectWithWallet';
 import ConnectWithEmail from './Views/Auth/ConnectWithEmail';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Dashboard from './Views/Dashboard';
 
 const Pages = [
   { path: "/", component: <HomePage /> },
+  { path: "/dashboard", component: <Dashboard /> },
   { path: "/connectWithEmail", component: <ConnectWithEmail/> },
   { path: "/connectWithWallet", component: <ConnectWithWallet/> },
 ];

@@ -4,7 +4,6 @@ import PricingSection from '../components/Home/PricingSection';
 import CTA from '../components/Home/CTA';
 const HomePage: React.FC = () => {
 
-  
   return (
     <>
       <Helmet>
