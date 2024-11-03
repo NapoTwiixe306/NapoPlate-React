@@ -3,6 +3,7 @@ import HomePage from './Views/Home';
 import ConnectWithWallet from './Views/Auth/connectWithWallet';
 import ConnectWithEmail from './Views/Auth/ConnectWithEmail';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 const Pages = [
   { path: "/", component: <HomePage /> },
@@ -19,6 +20,7 @@ const App: React.FC = () => {
           <Route key={index} path={page.path} element={page.component} />
         ))}
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 };
