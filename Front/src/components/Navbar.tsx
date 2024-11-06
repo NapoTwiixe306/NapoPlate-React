@@ -54,8 +54,8 @@ export default function Navbar() {
 
             <nav className="hidden md:flex md:items-center space-x-8">
                 <Link to="/" className="hover:text-gray-700 dark:hover:text-gray-300">Home</Link>
-                <Link to="/" className="hover:text-gray-700 dark:hover:text-gray-300">About</Link>
-                <Link to="/" className="hover:text-gray-700 dark:hover:text-gray-300">Contact</Link>
+                <Link to="/Dashboard" className="hover:text-gray-700 dark:hover:text-gray-300">Dashboard</Link>
+                <Link to="/Features" className="hover:text-gray-700 dark:hover:text-gray-300">Features</Link>
             </nav>
 
             <div className="hidden md:flex items-center space-x-4">

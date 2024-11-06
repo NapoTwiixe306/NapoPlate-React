@@ -5,10 +5,12 @@ import ConnectWithEmail from './Views/Auth/ConnectWithEmail';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Dashboard from './Views/Dashboard';
+import Features from './Views/Features';
 
 const Pages = [
   { path: "/", component: <HomePage /> },
   { path: "/dashboard", component: <Dashboard /> },
+  { path: "/Features", component: <Features /> },
   { path: "/connectWithEmail", component: <ConnectWithEmail/> },
   { path: "/connectWithWallet", component: <ConnectWithWallet/> },
 ];
