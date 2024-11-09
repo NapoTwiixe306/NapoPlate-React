@@ -6,7 +6,7 @@ import { FaMoon, FaSun, FaChevronDown } from "react-icons/fa";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(
-    () => localStorage.getItem("darkMode") === "true"
+    () => localStorage.getItem("darkMode") === "true",
   );
   const [isConnectOpen, setIsConnectOpen] = useState(false);
   const [isCommencerOpen, setIsCommencerOpen] = useState(false);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAccount, useBalance } from 'wagmi';
 import { Wallet, DollarSign, Activity, PieChart } from "lucide-react";
 

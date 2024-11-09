@@ -1,11 +1,11 @@
 import { Helmet } from "react-helmet-async";
-import { useAccount, useDisconnect,  } from "wagmi";
+import { useAccount, useDisconnect } from "wagmi";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useState } from "react";
 import DashboardOverview from "../components/Dashboard/DashboardOverview";
-
+import DashboardWallet from "../components/Dashboard/DashboardWallet";
 
 const Dashboard: React.FC = () => {
   const { address, isConnected } = useAccount();
@@ -13,7 +13,6 @@ const Dashboard: React.FC = () => {
   const { disconnect } = useDisconnect();
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState("overview");
- 
 
   const handleDisconnect = () => {
     disconnect();
@@ -21,7 +20,6 @@ const Dashboard: React.FC = () => {
     navigate("/");
   };
 
-  
   const truncateAddress = (addr: string) => {
     return `${addr.slice(0, 4)}...${addr.slice(-2)}`;
   };
@@ -33,13 +31,13 @@ const Dashboard: React.FC = () => {
     users: "Utilisateurs",
     settings: "Paramètres",
   };
- 
+
   const renderPageContent = () => {
     switch (currentPage) {
       case "overview":
-        return <DashboardOverview/>
+        return <DashboardOverview />;
       case "wallet":
-        return <h2 className="text-2xl font-bold">Portefeuille</h2>;
+        return <DashboardWallet/>;
       case "analytics":
         return <h2 className="text-2xl font-bold">Analytique</h2>;
       case "users":
