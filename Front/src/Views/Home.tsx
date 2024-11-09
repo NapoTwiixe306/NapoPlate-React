@@ -6,7 +6,7 @@ const HomePage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Accueil - NapoPlate React</title>
+        <title>Accueil - CryptoExtension</title>
       </Helmet>
       <main className="flex items-center justify-center flex-col mt-56 text-center text-xl text-black font-bold dark:text-white">
         <section className="p-4 lg:w-3/5 flex items-center justify-center flex-col h-full space-y-4">

@@ -44,7 +44,7 @@ export default function Navbar() {
           <polyline points="2 12 12 17 22 12" />
         </svg>
         <h1 className="text-xl font-bold">
-          <Link to="/">ReactBoilerplate</Link>
+          <Link to="/">CryptoExtension</Link>
         </h1>
       </div>
 
