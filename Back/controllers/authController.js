@@ -3,7 +3,7 @@ dotenv.config();
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { findUserByEmail, addUser } = require('../models/User');
+const { findUserByEmail, addUser } = require('../models/User'); // Assure-toi que ces fonctions existent et fonctionnent correctement
 
 // Fonction d'inscription
 exports.register = (req, res) => {
@@ -31,53 +31,37 @@ exports.register = (req, res) => {
 
 // Fonction de connexion
 exports.login = (req, res) => {
-    const { email, password } = req.body;
-  
-    findUserByEmail(email, (err, results) => {
-      if (err) return res.status(500).send('Erreur lors de la récupération des utilisateurs.');
-      if (results.length === 0) {
+  const { email, password } = req.body;
+
+  findUserByEmail(email, (err, results) => {
+    if (err) return res.status(500).send('Erreur lors de la récupération des utilisateurs.');
+    if (results.length === 0) {
+      return res.status(400).json({ message: 'Email ou mot de passe incorrect.' });
+    }
+
+    const user = results[0];
+
+    bcrypt.compare(password, user.password, (err, isMatch) => {
+      if (err) return res.status(500).send('Erreur lors de la comparaison des mots de passe.');
+      if (!isMatch) {
         return res.status(400).json({ message: 'Email ou mot de passe incorrect.' });
       }
-  
-      const user = results[0];
-  
-      bcrypt.compare(password, user.password, (err, isMatch) => {
-        if (err) return res.status(500).send('Erreur lors de la comparaison des mots de passe.');
-        if (!isMatch) {
-          return res.status(400).json({ message: 'Email ou mot de passe incorrect.' });
-        }
-  
-        // Vérifie que la variable d'environnement JWT_SECRET est présente
-        if (!process.env.JWT_SECRET) {
-          return res.status(500).json({ message: 'Clé secrète manquante pour la création du token JWT.' });
-        }
-  
-        console.log('JWT_SECRET:', process.env.JWT_SECRET);  // Affiche le secret pour vérifier s'il est bien chargé
-  
-        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.status(200).json({ message: 'Connexion réussie', token });
-      });
-    });
-};
 
-// Fonction pour récupérer les informations de l'utilisateur connecté
-exports.getUserInfo = (req, res) => {
-  const token = req.headers.authorization?.split(" ")[1]; // Récupérer le token depuis le header
-  
-  if (!token) {
-    return res.status(401).json({ message: 'Token manquant.' });
-  }
-  
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) return res.status(403).json({ message: 'Token invalide.' });
-    
-    findUserByEmail(decoded.userId, (err, results) => {
-      if (err) return res.status(500).send('Erreur lors de la récupération de l\'utilisateur.');
-      if (results.length === 0) {
-        return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+      // Vérifie que la variable d'environnement JWT_SECRET est présente
+      if (!process.env.JWT_SECRET) {
+        return res.status(500).json({ message: 'Clé secrète manquante pour la création du token JWT.' });
       }
-      const user = results[0];
-      res.status(200).json({ email: user.email }); // Renvoyer l'email de l'utilisateur
+
+      console.log('JWT_SECRET:', process.env.JWT_SECRET);  // Affiche le secret pour vérifier s'il est bien chargé
+
+      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      res.status(200).json({ message: 'Connexion réussie', token });
     });
   });
+};
+
+// Fonction de déconnexion
+exports.logout = (req, res) => {
+  // Ici on n'a pas besoin de logic côté serveur car on supprime juste le token côté client
+  res.status(200).json({ message: 'Déconnexion réussie.' });
 };

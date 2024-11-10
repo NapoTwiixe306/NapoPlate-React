@@ -7,7 +7,7 @@ import {
   Settings,
   Home,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { MdMenu, MdClose } from "react-icons/md";
 
@@ -21,6 +21,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
     () => localStorage.getItem("darkMode") === "true",
   );
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (darkMode) {
@@ -45,6 +46,12 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
     if (isOpen) setIsOpen(false);
   };
 
+  const handleLogout = () => {
+    // Supprimer le token du localStorage (ou cookie)
+    localStorage.removeItem("token");
+    navigate("/"); // Rediriger vers la page d'accueil
+  };
+
   return (
     <aside className="h-full">
       <button
@@ -59,8 +66,6 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
         } md:static md:block dark:bg-gray-900`}
         style={{ boxShadow: "0px 0px 10px 2px rgba(255, 255, 255, 0.2)" }}
       >
-
-
         <h2 className="text-2xl font-bold mb-8">Dashboard</h2>
         <nav>
           <ul className="flex flex-col gap-4">
@@ -124,24 +129,27 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage }) => {
             <li className="mb-4 flex gap-4 transition-colors cursor-pointer p-2 hover:bg-indigo-800 rounded-sm">
               <Home />
               <Link to="/" className="text-gray-300 hover:text-white">
-                Home
+                Accueil
               </Link>
             </li>
           </ul>
         </nav>
-        <button
-          onClick={toggleDarkMode}
-          className="absolute bottom-4 left-4 p-2 text-white rounded-full"
-        >
-          {darkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
-        </button>
+        <div className="absolute bottom-8 left-8 flex flex-col gap-4">
+          <button
+            className="flex items-center gap-2 text-gray-300 hover:text-white"
+            onClick={toggleDarkMode}
+          >
+            {darkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
+            {darkMode ? "Passer en mode clair" : "Passer en mode sombre"}
+          </button>
+          <button
+            onClick={handleLogout}
+            className="mt-4 p-2 bg-red-600 hover:bg-red-800 text-white rounded-md"
+          >
+            Déconnexion
+          </button>
+        </div>
       </div>
-      {isOpen && (
-        <div
-          className="fixed inset-0 z-30 bg-black opacity-50 md:hidden"
-          onClick={toggleSidebar}
-        ></div>
-      )}
     </aside>
   );
 };

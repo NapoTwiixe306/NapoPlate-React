@@ -1,5 +1,5 @@
 const express = require('express');
-const { register, login, getUserInfo } = require('../controllers/authController');
+const { register, login, logout } = require('../controllers/authController');
 
 const router = express.Router();
 
@@ -9,7 +9,7 @@ router.post('/register', register);
 // Route pour la connexion
 router.post('/login', login);
 
-// Route pour récupérer les informations de l'utilisateur connecté
-router.get('/user', getUserInfo);
+// Route pour la déconnexion
+router.post('/logout', logout);
 
 module.exports = router;

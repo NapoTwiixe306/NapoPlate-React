@@ -60,12 +60,6 @@ export default function Navbar() {
           Home
         </Link>
         <Link
-          to="/dashboard"
-          className="hover:text-gray-700 dark:hover:text-gray-300"
-        >
-          Dashboard
-        </Link>
-        <Link
           to="/Features"
           className="hover:text-gray-700 dark:hover:text-gray-300"
         >
@@ -121,12 +115,6 @@ export default function Navbar() {
               className="hover:text-gray-700 dark:hover:text-gray-300"
             >
               Home
-            </Link>
-            <Link
-              to="/dashboard"
-              className="hover:text-gray-700 dark:hover:text-gray-300"
-            >
-              Dashboard
             </Link>
             <Link
               to="/"
