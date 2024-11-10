@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Dashboard from "./Views/Dashboard";
 import Features from "./Views/Features";
+import Login from "./Views/login";
 
 const Pages = [
   { path: "/", component: <HomePage /> },
@@ -13,6 +14,7 @@ const Pages = [
   { path: "/features", component: <Features /> },
   { path: "/connectWithEmail", component: <ConnectWithEmail /> },
   { path: "/connectWithWallet", component: <ConnectWithWallet /> },
+  { path: "/login", component: <Login /> }, // Ajoute la route /login ici
 ];
 
 const AppContent: React.FC = () => {

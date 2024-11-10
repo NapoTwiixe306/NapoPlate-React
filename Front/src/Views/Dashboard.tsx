@@ -6,6 +6,8 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useState } from "react";
 import DashboardOverview from "../components/Dashboard/DashboardOverview";
 import DashboardWallet from "../components/Dashboard/DashboardWallet";
+import DashboardAnalytics from "../components/Dashboard/DashboardAnalytics";
+import DashboardUser from "../components/Dashboard/DashboardUser";
 
 const Dashboard: React.FC = () => {
   const { address, isConnected } = useAccount();
@@ -37,11 +39,11 @@ const Dashboard: React.FC = () => {
       case "overview":
         return <DashboardOverview />;
       case "wallet":
-        return <DashboardWallet/>;
+        return <DashboardWallet />;
       case "analytics":
-        return <h2 className="text-2xl font-bold">Analytique</h2>;
+        return <DashboardAnalytics />;
       case "users":
-        return <h2 className="text-2xl font-bold">Utilisateurs</h2>;
+        return <DashboardUser/>;
       case "settings":
         return <h2 className="text-2xl font-bold">Paramètres</h2>;
       default:
@@ -82,7 +84,13 @@ const Dashboard: React.FC = () => {
               <section className="py-6">{renderPageContent()}</section>
             </div>
           ) : (
-            <ConnectButton />
+            <>
+              <div className="flex items-center gap-6 text-black dark:text-white">
+                <ConnectButton />
+                <p>Veuillez vous connecter</p>
+
+              </div>
+            </>
           )}
         </main>
       </div>
